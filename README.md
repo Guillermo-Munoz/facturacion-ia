@@ -29,7 +29,7 @@ Este proyecto es una aplicaci√≥n que permite extraer datos de facturas desde im√
 
 Clona el repositorio:
 
-git clone https://github.com/tu-usuario/nombre-del-repo.git
+git clone https://github.com/Guillermo-Munoz/facturacion-ia
 cd nombre-del-repo
 
 Instala dependencias:
@@ -40,13 +40,13 @@ Inicia el servidor:
 
 uvicorn main:app --reload
 
-Accede a la API desde http://localhost:8000/docs
+Accede a la API desde http://localhost:3000/
 
 ## Uso de la API
 
 Sube una imagen de factura usando la ruta /upload. Puedes hacerlo desde Swagger UI o con curl:
 
-curl -X POST "http://localhost:8000/upload" \
+curl -X POST "http://localhost:3000/upload" \
  -F "file=@factura.jpg"
 
 Respuesta esperada:
