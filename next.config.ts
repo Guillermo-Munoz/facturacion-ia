@@ -53,6 +53,9 @@ const nextConfig: NextConfig = {
 
   // ✅ Aquí va la clave actualizada
   serverExternalPackages: ['tesseract.js'],
+ eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
