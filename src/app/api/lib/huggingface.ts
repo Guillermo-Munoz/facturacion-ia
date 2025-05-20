@@ -6,7 +6,7 @@ if (!GEMINI_API_KEY) {
   console.error("❌ No se encontró el API key de Gemini en las variables de entorno");
 }
 
-export async function preguntarGemini(texto: string) {
+export async function preguntarGemini(texto: string,) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 const prompt = `
@@ -55,7 +55,7 @@ ${texto}
   let data;
   try {
     data = JSON.parse(raw);
-  } catch  {
+  } catch (e) {
     console.error('❌ Error al parsear JSON:', raw);
     return "Respuesta no válida de la IA.";
   }
