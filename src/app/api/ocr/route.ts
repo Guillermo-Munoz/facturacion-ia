@@ -29,8 +29,7 @@ export async function POST(req: Request) {
     const texto = data.text;
 
     // ✨ IA para extraer información
-    const instruccion = "Extrae la fecha y el total de la factura";
-    const respuestaIA = await preguntarGemini(texto, instruccion);
+    const respuestaIA = await preguntarGemini(texto);
 
     return NextResponse.json({ raw: texto, extraido: respuestaIA });
 
