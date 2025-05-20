@@ -1,80 +1,33 @@
-# App de Facturación Inteligente con OCR
+# 🧾 OCR Facturación AI
 
-Este proyecto es una aplicación que permite extraer datos de facturas desde imágenes utilizando OCR (Reconocimiento Óptico de Caracteres) y técnicas de Inteligencia Artificial para convertirlas en texto estructurado.
+Aplicación web que permite subir imágenes de facturas o recibos, extraer su texto con OCR y usar IA para obtener datos clave como **fecha** e **importe total**.
 
-## Funcionalidades
+![Demo UI](./public/Captura.png) <!-- Cambia la ruta si usas otra imagen -->
 
-- Carga de facturas en formato imagen (JPG, PNG, PDF).
-- Extracción automática de:
-  - Número de factura
-  - Fecha
-  - Total
-  - NIF/CIF
-  - Empresa emisora
-- Motor OCR basado en Tesseract.
-- Procesamiento y limpieza de texto con Python.
-- API REST para integraciones externas.
-- Interfaz web básica (opcional).
+## 🚀 Demo
 
-## Tecnologías utilizadas
+🔗 [Ver demo en Vercel](https://ocr-facturacion-ai.vercel.app)
 
-- Python + FastAPI para el backend.
-- Tesseract OCR para reconocimiento de texto.
-- OpenCV para preprocesamiento de imágenes.
-- Regex / NLP para estructurar datos.
-- Docker para facilitar el despliegue (opcional).
-- MongoDB / PostgreSQL para almacenar facturas procesadas (opcional).
+> Requiere iniciar sesión (Clerk).
 
-## Instalación y ejecución
+## 🔐 Autenticación con Clerk
 
-Clona el repositorio:
+- Se utiliza Clerk para gestionar usuarios.
+- Solo los usuarios autenticados pueden acceder al procesador OCR.
+- Se integra con `<SignInButton />` y `<UserButton />` en la cabecera.
 
-git clone https://github.com/Guillermo-Munoz/facturacion-ia
-cd nombre-del-repo
+## 🛠️ Tecnologías
 
-Instala dependencias:
+- Next.js
+- Clerk (auth)
+- Tesseract.js (OCR)
+- Gemini
+- Tailwind CSS
 
-pip install -r requirements.txt
+## 📦 Cómo usar
 
-Inicia el servidor:
-
-uvicorn main:app --reload
-
-Accede a la API desde http://localhost:3000/
-
-## Uso de la API
-
-Sube una imagen de factura usando la ruta /upload. Puedes hacerlo desde Swagger UI o con curl:
-
-curl -X POST "http://localhost:3000/upload" \
- -F "file=@factura.jpg"
-
-Respuesta esperada:
-
-{
-"fecha": "2024-03-15",
-"total": "234.50",
-"nif": "B12345678",
-"empresa": "Facturadora S.A.",
-"numero_factura": "F-2024-0005"
-}
-
-## Recursos útiles
-
-- Tesseract OCR: https://github.com/tesseract-ocr/tesseract
-- FastAPI: https://fastapi.tiangolo.com/
-- OpenCV: https://opencv.org/
-- Regex101: https://regex101.com/
-
-## Despliegue
-
-Puedes desplegar esta aplicación en plataformas como:
-
-- Render: https://render.com/
-- Railway: https://railway.app/
-- Heroku: https://heroku.com/
-- Servidores propios con Docker + Uvicorn
-
-## Licencia
-
-Este proyecto está bajo la licencia MIT. Puedes usarlo, modificarlo y distribuirlo libremente.
+```bash
+git clone https://github.com/tu-usuario/ocr-facturacion-ai
+cd ocr-facturacion-ai
+npm install
+```
