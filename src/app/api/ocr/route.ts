@@ -1,6 +1,7 @@
- import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import Tesseract from 'tesseract.js';
 import { preguntarGemini } from '../lib/huggingface';
+import sharp from 'sharp';
 
 export async function POST(req: Request) {
   const formData = await req.formData();
@@ -14,20 +15,27 @@ export async function POST(req: Request) {
   const buffer = Buffer.from(arrayBuffer);
 
   try {
-    const { data } = await Tesseract.recognize(buffer, 'spa');
+    // 🔧 Preprocesamiento con sharp
+    const processedBuffer = await sharp(buffer)
+      .resize({ width: 1200 })     // Estándar uniforme
+      .grayscale()                 // Escala de grises mejora OCR
+      .normalize()                 // Aumenta contraste
+      .sharpen()                   // Mejora bordes
+      // .threshold(150)           // (opcional) blanco y negro
+      .toBuffer();
+
+    // 🧠 OCR
+    const { data } = await Tesseract.recognize(processedBuffer, 'spa');
     const texto = data.text;
 
-    // Instrucción: puedes ajustarla según lo que necesites
-    // const instruccion = "Extrae la fecha y el total de la factura";
-
-    // const respuestaIA = await preguntarGemini(texto, instruccion);
+    // ✨ IA para extraer información
     const instruccion = "Extrae la fecha y el total de la factura";
     const respuestaIA = await preguntarGemini(texto, instruccion);
 
     return NextResponse.json({ raw: texto, extraido: respuestaIA });
+
   } catch (error) {
     console.error('Error OCR o IA:', error);
     return NextResponse.json({ error: 'Error al procesar la imagen' }, { status: 500 });
   }
-
 }

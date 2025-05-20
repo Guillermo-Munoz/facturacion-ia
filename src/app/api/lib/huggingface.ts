@@ -9,7 +9,23 @@ if (!GEMINI_API_KEY) {
 export async function preguntarGemini(texto: string, instruccion: string) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
-  const prompt = `${instruccion}\n\nTexto:\n${texto}`;
+const prompt = `
+Extrae los siguientes campos del texto de una factura:
+
+- Nombre del proveedor
+- Fecha
+- Número de factura
+- Subtotal
+- IVA (si aplica)
+- Total
+- Moneda
+- Conceptos (si hay una tabla, resume cada línea)
+
+Devuelve el resultado en formato JSON válido con los campos anteriores.
+
+Texto OCR:
+${texto}
+`;
 
   const body = {
     contents: [
