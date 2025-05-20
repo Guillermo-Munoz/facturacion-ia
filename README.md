@@ -6,7 +6,7 @@ Aplicación web que permite subir imágenes de facturas o recibos, extraer su te
 
 ## 🚀 Demo
 
-🔗 [Ver demo en Vercel](https://ocr-facturacion-ai.vercel.app)
+🔗 [Ver demo en Vercel](https://facturacion-ia.vercel.app/)
 
 > Requiere iniciar sesión (Clerk).
 
