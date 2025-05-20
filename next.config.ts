@@ -1,14 +1,20 @@
- import type { NextConfig } from "next";
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
-    config.experiments = { ...config.experiments, topLevelAwait: true };
+    // Habilitar características experimentales
+    config.experiments = { 
+      ...config.experiments,
+      topLevelAwait: true,
+      asyncWebAssembly: true
+    };
 
+    // Configuraciones específicas para el servidor
     if (isServer) {
       config.resolve = {
         ...config.resolve,
         alias: {
-          ...config.resolve.alias,
+          ...config.resolve?.alias,
           sharp$: false,
           'onnxruntime-node$': false,
         },
@@ -17,7 +23,7 @@ const nextConfig: NextConfig = {
       config.module = {
         ...config.module,
         rules: [
-          ...config.module.rules,
+          ...config.module?.rules || [],
           {
             test: /\.worker\.js$/,
             loader: 'worker-loader',
@@ -40,19 +46,25 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
+            value: 'same-origin'
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp',
+            value: 'require-corp'
           },
+          {
+            key: 'Content-Type',
+            value: 'application/wasm'
+          }
         ],
       },
     ];
   },
 
-  // ✅ Aquí va la clave actualizada
   serverExternalPackages: ['tesseract.js'],
+  
+  // Opcional: Configuración para standalone (recomendado para producción)
+  output: process.env.NODE_ENV === 'production' ? 'standalone' : undefined,
 };
 
 export default nextConfig;
