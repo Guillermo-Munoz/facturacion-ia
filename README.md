@@ -23,6 +23,7 @@ Aplicación web que permite subir imágenes de facturas o recibos, extraer su te
 - Tesseract.js (OCR)
 - Gemini
 - Tailwind CSS
+- 
 
 ## 📦 Cómo usar
 
