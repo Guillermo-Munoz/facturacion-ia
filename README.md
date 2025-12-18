@@ -33,4 +33,3 @@ cd ocr-facturacion-ai
 npm install
 ```
 
-
