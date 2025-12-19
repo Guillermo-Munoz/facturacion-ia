@@ -32,4 +32,3 @@ git clone https://github.com/tu-usuario/ocr-facturacion-ai
 cd ocr-facturacion-ai
 npm install
 ```
-
